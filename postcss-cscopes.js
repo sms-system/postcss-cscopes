@@ -53,7 +53,7 @@ module.exports = postcss.plugin('cscopes', function (opts) {
                          .replace(/(\.[^ .:]+?)/g, '$1_scope' + level)
 
                       if (rule.selectors.indexOf(newSelector) == -1) {
-                        rule.selector = rule.selector + ', ' + newSelector
+                        rule.selectors = rule.selectors.concat(newSelector)
                       }
                       break
                     }
