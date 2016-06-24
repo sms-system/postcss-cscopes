@@ -19,9 +19,11 @@ module.exports = postcss.plugin('cscopes', function (opts) {
 
             css.walkRules(function(rule) {
               rule.selectors.forEach(function(selector) {
-                if (selector.indexOf(' ') != -1 && el.is(selector)) {
+                searchSelector = selector.replace(/:[^ .,:]+/g, '')
+                if (selector.indexOf(' ') != -1 && el.is(searchSelector)) {
 
-                  var searchParts = selector.split(/ +/)
+                  var printParts   = selector.split(/ +/)
+                  var searchParts  = searchSelector.split(/ +/)
                   var parentScopes = el.parents('[scoped]').toArray()
 
                   var validationEl = parentScopes.pop()
@@ -34,11 +36,11 @@ module.exports = postcss.plugin('cscopes', function (opts) {
                     validationInterval[1] = i
                     if ($(validationEl).is( searchParts.slice(0, i).join(' ') )) {
                       if (validationLevel > 0) {
-                        firstHalf += searchParts
+                        firstHalf += printParts
                          .slice(...validationInterval).join(' ')
                          .replace(/(\.[^ .:]+?)/g, '$1_scope' + validationLevel)
                       } else {
-                        firstHalf += searchParts
+                        firstHalf += printParts
                          .slice(...validationInterval).join(' ')
                       }
 
@@ -48,9 +50,9 @@ module.exports = postcss.plugin('cscopes', function (opts) {
                       validationInterval[0] = i
                     }
                     if (!validationEl) {
-                      var newSelector = firstHalf + searchParts
+                      var newSelector = firstHalf + printParts
                          .slice(i).join(' ')
-                         .replace(/(\.[^ .:]+?)/g, '$1_scope' + level)
+                         .replace(/(\.[^ .,:]+)/g, '$1_scope' + level)
 
                       if (rule.selectors.indexOf(newSelector) == -1) {
                         rule.selectors = rule.selectors.concat(newSelector)
