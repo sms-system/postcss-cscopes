@@ -17,16 +17,16 @@ module.exports = postcss.plugin('cscopes', function (opts) {
           var level = el.parents('[scoped]').length
           if (level == parent.parents('[scoped]').length + 1) {
 
-            var globalClasses = (el.attr('global')||'').trim().split(/ +/)
+            var globalClasses = (el.attr('global')||'').split(/ +/)
             el.removeAttr('global')
 
             var elClasses = el.attr('class')
-              .trim()
               .split(/ +/)
               .filter(c => globalClasses.indexOf(c) == -1)
             var newClasses = elClasses
               .map( c => c + '_scope' + level )
               .concat(globalClasses)
+              .filter(c => c)
               .join(' ')
             classReplacesQueue.push([el, newClasses])
 
@@ -51,7 +51,7 @@ module.exports = postcss.plugin('cscopes', function (opts) {
                       if (validationLevel > 0) {
                         firstHalf += printParts
                          .slice(...validationInterval).join(' ')
-                         .replace(/(\.[^ .:]+?)/g, '$1_scope' + validationLevel)
+                         .replace(/(\.[^ .,:]+)/g, '$1_scope' + validationLevel)
                       } else {
                         firstHalf += printParts
                          .slice(...validationInterval).join(' ')
@@ -66,7 +66,6 @@ module.exports = postcss.plugin('cscopes', function (opts) {
                       var newSelector = firstHalf + printParts
                          .slice(i).join(' ')
                          .replace(/(\.[^ .,:]+)/g, '$1_scope' + level)
-
                       if (rule.selectors.indexOf(newSelector) == -1) {
                         rule.selectors = rule.selectors.concat(newSelector)
                       }
