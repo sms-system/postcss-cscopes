@@ -1,6 +1,6 @@
 # postcss-cscopes
 
-A PostCSS plugin that automagc adds scopes to CSS
+A PostCSS plugin that automagic adds scopes to CSS
 
 ## Features
 
