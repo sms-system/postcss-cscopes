@@ -17,6 +17,19 @@ module.exports = postcss.plugin('cscopes', function (opts) {
           var level = el.parents('[scoped]').length
           if (level == parent.parents('[scoped]').length + 1) {
 
+            var globalClasses = (el.attr('global')||'').trim().split(/ +/)
+            el.removeAttr('global')
+
+            var elClasses = el.attr('class')
+              .trim()
+              .split(/ +/)
+              .filter(c => globalClasses.indexOf(c) == -1)
+            var newClasses = elClasses
+              .map( c => c + '_scope' + level )
+              .concat(globalClasses)
+              .join(' ')
+            classReplacesQueue.push([el, newClasses])
+
             css.walkRules(function(rule) {
               rule.selectors.forEach(function(selector) {
                 searchSelector = selector.replace(/:[^ .,:]+/g, '')
@@ -65,10 +78,6 @@ module.exports = postcss.plugin('cscopes', function (opts) {
                 }
               })
             })
-
-            var elClasses = el.attr('class').trim().split(/ +/)
-            var newClasses = elClasses.map( c => c + '_scope' + level).join(' ')
-            classReplacesQueue.push([el, newClasses])
 
           }
         })
