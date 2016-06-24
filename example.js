@@ -4,12 +4,12 @@ var cscopes = require('./postcss-cscopes');
 console.log(postcss([
   cscopes({
     html: `
-      <div class="c">.a</div>
+      <div class="c m">.a</div>
       <div class="a">
-        <div class="c">.a</div>
+        <div class="c m">.a</div>
       </div>
       <div scoped="scoped" class="b">
-        <div class="c">.a</div>
+        <div global="m" class="c m">.a</div>
       </div>`,
     getHTML: function (html) {
       console.log(html)
@@ -18,10 +18,14 @@ console.log(postcss([
 ]).process(`
   .c {
     color: #f00;
+  }
+  .m {
     margin: 10px;
   }
   .a .c, .b .c {
+    background: #fdd;
+  }
+  .a .c:hover, .b .c:hover {
     background: #f00;
-    margin: 10px;
   }`
 ).css)
