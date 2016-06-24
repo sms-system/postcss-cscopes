@@ -58,7 +58,7 @@ After the transformation HTML and CSS become like this:
 ```html
 <div class="title">Main title</div>
 <div class="block">
-  <div class="title_scope1 ">Block Title</div>
+  <div class="title_scope1">Block Title</div>
 </div>
 ```
 
