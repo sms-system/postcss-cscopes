@@ -49,9 +49,27 @@ Just add attribute `scoped` to element with class `.block`,
 </div>
 ```
 
-and all classes inside it automagically become isolated
+and all classes inside it automagically become isolated.
 
 ![Without scopes](https://raw.githubusercontent.com/sms-system/postcss-scope/master/img/with_scopes.png)
+
+After the transformation HTML and CSS become like this:
+
+```html
+<div class="title">Main title</div>
+<div class="block">
+  <div class="title_scope1 ">Block Title</div>
+</div>
+```
+
+```css
+.title {
+  background: #da9a9a;
+}
+.block .title, .block .title_scope1 {
+  color: #da9a9a;
+}
+```
 
 ## Support
 
