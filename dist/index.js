@@ -10,6 +10,8 @@ module.exports = postcss.plugin('scopes', function (opts) {
       var $ = cheerio.load(opts.html, { decodeEntities: false })
       var classReplacesQueue = []
 
+      var globalPatterns = opts.globalPatterns || []
+
       $('[scoped]').each(function() {
         var parent = $(this)
         parent.find('*').each(function() {
@@ -21,10 +23,16 @@ module.exports = postcss.plugin('scopes', function (opts) {
             el.removeAttr('global')
 
             var elClasses = el.attr('class')
-            var newClasses;
+            var newClasses
             if (elClasses) {
               elClasses = elClasses
                 .split(/ +/)
+              globalClasses.push(
+                ...elClasses.filter(c =>
+                  !globalPatterns.every(p => !(new RegExp(p)).test(c))
+                )
+              )
+              elClasses = elClasses
                 .filter(c => globalClasses.indexOf(c) == -1)
               newClasses = elClasses
                 .map( c => c + '_scope' + level )
