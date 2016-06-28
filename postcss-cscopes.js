@@ -32,7 +32,7 @@ module.exports = postcss.plugin('cscopes', function (opts) {
                 .filter(c => c)
                 .join(' ')
             } else {
-              newClasses = el.attr('class', globalClasses.join(' '))
+              newClasses = globalClasses.join(' ')
             }
             classReplacesQueue.push([el, newClasses])
 
@@ -88,7 +88,9 @@ module.exports = postcss.plugin('cscopes', function (opts) {
         })
       })
 
-      classReplacesQueue.forEach( a => a[0].attr('class', a[1]))
+      classReplacesQueue.forEach( a => {
+        if (a[1]) a[0].attr('class', a[1])
+      })
       $('[scoped]').removeAttr('scoped')
 
       if (opts.getHTML) opts.getHTML($.html())
