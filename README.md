@@ -6,7 +6,7 @@
 
 - Nested scopes
 - Support for pseudo-elements on scoped elements
-- Global classes inside the scopes, using `global` attribute
+- Global classes inside the scopes, using `global` attribute, or automatically by matching pattern in `globalPatterns` option
 - Automatic html recomposition, which doesn't break initial code
 - Easy integration into an existing project
 
