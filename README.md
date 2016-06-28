@@ -73,6 +73,9 @@ After the transformation HTML and CSS become like this:
 
 ## Options
 
+#### globalPatterns
+Type: `Array` Array of regexp patterns matching global classes
+
 #### html
 Type: `String` Initial html
 
