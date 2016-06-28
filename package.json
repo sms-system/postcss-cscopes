@@ -16,7 +16,7 @@
     "scopes",
     "postcss-plugin"
   ],
-  "author": "Sergey Smirnov",
+  "author": "Sergey Smirnov <sms-system@mail.ru>",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/sms-system/postcss-cscopes/issues"
