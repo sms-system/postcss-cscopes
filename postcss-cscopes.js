@@ -21,13 +21,19 @@ module.exports = postcss.plugin('cscopes', function (opts) {
             el.removeAttr('global')
 
             var elClasses = el.attr('class')
-              .split(/ +/)
-              .filter(c => globalClasses.indexOf(c) == -1)
-            var newClasses = elClasses
-              .map( c => c + '_scope' + level )
-              .concat(globalClasses)
-              .filter(c => c)
-              .join(' ')
+            var newClasses;
+            if (elClasses) {
+              elClasses = elClasses
+                .split(/ +/)
+                .filter(c => globalClasses.indexOf(c) == -1)
+              newClasses = elClasses
+                .map( c => c + '_scope' + level )
+                .concat(globalClasses)
+                .filter(c => c)
+                .join(' ')
+            } else {
+              newClasses = el.attr('class', globalClasses.join(' '))
+            }
             classReplacesQueue.push([el, newClasses])
 
             css.walkRules(function(rule) {
