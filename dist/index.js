@@ -1,7 +1,7 @@
 var postcss = require('postcss'),
     cheerio = require('cheerio')
 
-module.exports = postcss.plugin('cscopes', function (opts) {
+module.exports = postcss.plugin('scopes', function (opts) {
   opts = opts || {}
 
   return function (css, result) {
