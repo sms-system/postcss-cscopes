@@ -89,7 +89,7 @@ postcss([
   scopes({
     globalPatterns: ['^js-'],
     html: `
-      <div class="title" global="js-title-class">Main title</div>
+      <div class="title">Main title</div>
       <div class="block" scoped>
         <div class="title js-title-class">Block Title</div>
       </div>`,
