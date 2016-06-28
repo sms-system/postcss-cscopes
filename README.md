@@ -85,18 +85,22 @@ Type: `Function`, arguments `html` The function takes an argument compiled html 
 postcss([
   cscopes({
     html: `
-      <div class="c m">.a</div>
-      <div class="a">
-        <div class="c m">.a</div>
-      </div>
-      <div scoped="scoped" class="b">
-        <div global="m" class="c m">.a</div>
+      <div class="title">Main title</div>
+      <div class="block">
+        <div class="title">Block Title</div>
       </div>`,
     getHTML: function (html) {
       console.log(html)
     }
   })
-])
+]).process(`
+  .title {
+    background: #da9a9a;
+  }
+  .block .title {
+    color: #da9a9a;
+  }`
+)
 ```
 
 ## Support
