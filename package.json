@@ -1,0 +1,29 @@
+{
+  "name": "postcss-cscopes",
+  "version": "1.0.0",
+  "description": "PostCSS plugin that automagic adds scopes to CSS",
+  "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sms-system/postcss-cscopes.git"
+  },
+  "keywords": [
+    "postcss",
+    "plugin",
+    "html",
+    "css",
+    "scope",
+    "scopes",
+    "postcss-plugin"
+  ],
+  "author": "Sergey Smirnov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sms-system/postcss-cscopes/issues"
+  },
+  "homepage": "https://github.com/sms-system/postcss-cscopes#readme",
+  "dependencies": {
+    "cheerio": "^0.20.0",
+    "postcss": "^5.0.21"
+  }
+}
