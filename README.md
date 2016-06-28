@@ -1,4 +1,4 @@
-# postcss-cscopes
+# postcss-scopes
 
 [PostCSS](https://github.com/postcss/postcss) plugin that automagic adds scopes to CSS
 
@@ -34,7 +34,7 @@ and CSS:
 
 If we try to display this markup, we get a problem:
 
-![Without scopes](https://raw.githubusercontent.com/sms-system/postcss-scope/master/img/without_scopes.png)
+![Without scopes](https://raw.githubusercontent.com/sms-system/postcss-scopes/master/img/without_scopes.png)
 
 `.block .title` inherited styles from root .title, but we don't want this.
 
@@ -51,7 +51,7 @@ Just add attribute `scoped` to element with class `.block`,
 
 and all classes inside it automagically become isolated.
 
-![Without scopes](https://raw.githubusercontent.com/sms-system/postcss-scope/master/img/with_scopes.png)
+![Without scopes](https://raw.githubusercontent.com/sms-system/postcss-scopes/master/img/with_scopes.png)
 
 After the transformation HTML and CSS become like this:
 
@@ -83,7 +83,7 @@ Type: `Function`, arguments `html` The function takes an argument compiled html 
 
 ```js
 postcss([
-  cscopes({
+  scopes({
     html: `
       <div class="title">Main title</div>
       <div class="block">
@@ -105,4 +105,4 @@ postcss([
 
 ## Support
 
-Please [open an issue](https://github.com/sms-system/postcss-scope/issues/new) for support.
+Please [open an issue](https://github.com/sms-system/postcss-scopes/issues/new) for support.
