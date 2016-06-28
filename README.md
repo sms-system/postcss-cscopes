@@ -84,10 +84,11 @@ Type: `Function`, arguments `html` The function takes an argument compiled html 
 ```js
 postcss([
   scopes({
+    globalPatterns: ['^js-'],
     html: `
-      <div class="title">Main title</div>
-      <div class="block">
-        <div class="title">Block Title</div>
+      <div class="title" global="js-title-class">Main title</div>
+      <div class="block" scoped>
+        <div class="title js-title-class">Block Title</div>
       </div>`,
     getHTML: function (html) {
       console.log(html)
@@ -96,6 +97,9 @@ postcss([
 ]).process(`
   .title {
     background: #da9a9a;
+  }
+  .js-title-class {
+    text-decoration: underline;
   }
   .block .title {
     color: #da9a9a;
