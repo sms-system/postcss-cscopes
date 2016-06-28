@@ -1,6 +1,6 @@
 # postcss-cscopes
 
-A PostCSS plugin that automagic adds scopes to CSS
+A [PostCSS](https://github.com/postcss/postcss) plugin that automagic adds scopes to CSS
 
 ## Features
 
@@ -10,7 +10,7 @@ A PostCSS plugin that automagic adds scopes to CSS
 - Automatic html recomposition, which doesn't break initial code
 - Easy integration into an existing project
 
-## Example
+## What is it ?
 
 Imagine that you have HTML like this:
 
@@ -69,6 +69,34 @@ After the transformation HTML and CSS become like this:
 .block .title, .block .title_scope1 {
   color: #da9a9a;
 }
+```
+
+## Options
+
+#### html
+Type: `String` Initial html
+
+#### getHTML
+Type: `Function`, arguments `html` The function takes an argument compiled html for further processing
+
+## Example
+
+```js
+postcss([
+  cscopes({
+    html: `
+      <div class="c m">.a</div>
+      <div class="a">
+        <div class="c m">.a</div>
+      </div>
+      <div scoped="scoped" class="b">
+        <div global="m" class="c m">.a</div>
+      </div>`,
+    getHTML: function (html) {
+      console.log(html)
+    }
+  })
+])
 ```
 
 ## Support
