@@ -73,9 +73,9 @@ After the transformation HTML and CSS become like this:
 
 ## Options
 
-| Option                                                          | Description                                                          |
-| :-------------------------------------------------------------- | :------------------------------------------------------------------- |
-| **optimiseCss** <br> Type: `Boolean`, default: `true`           | <br>Remove unused classes after processing                     |
+| Option                                                          | Description                                                              |
+| :-------------------------------------------------------------- | :----------------------------------------------------------------------- |
+| **optimiseCss** <br> Type: `Boolean`, default: `true`           | <br>Remove unused classes after processing                               |
 | **globalPatterns** <br> Type: `Array`                           | <br>Array of RegExp patterns matching global classes                     |
 | **html** <br> Type: `String`                                    | <br>Initial html                                                         |
 | **getHTML** <br> Type: `Function`, arguments `html`             | <br>The function takes an argument compiled html for further processing  |
