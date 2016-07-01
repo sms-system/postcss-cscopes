@@ -1,16 +1,26 @@
 var postcss = require('postcss'),
     cheerio = require('cheerio')
 
+var withoutPseudos = selector => selector.replace(/:[^ .,:]+/g, '')
+
 module.exports = postcss.plugin('scopes', function (opts) {
   opts = opts || {}
 
   return function (css, result) {
     if (opts.html) {
 
+      if (typeof opts.globalPatterns == 'undefined') {
+        opts.globalPatterns = []
+      }
+      if (typeof opts.optimiseCss == 'undefined') {
+        opts.optimiseCss = true
+      }
+
+
       var $ = cheerio.load(opts.html, { decodeEntities: false })
       var classReplacesQueue = []
-
-      var globalPatterns = opts.globalPatterns || []
+      var globalPatterns = opts.globalPatterns
+      var trackRules = []
 
       $('[scoped]').each(function() {
         var parent = $(this)
@@ -46,7 +56,7 @@ module.exports = postcss.plugin('scopes', function (opts) {
 
             css.walkRules(function(rule) {
               rule.selectors.forEach(function(selector) {
-                searchSelector = selector.replace(/:[^ .,:]+/g, '')
+                searchSelector = withoutPseudos(selector)
                 if (selector.indexOf(' ') != -1 && el.is(searchSelector)) {
 
                   var printParts   = selector.split(/ +/)
@@ -82,6 +92,7 @@ module.exports = postcss.plugin('scopes', function (opts) {
                          .replace(/(\.[^ .,:]+)/g, '$1_scope' + level)
                       if (rule.selectors.indexOf(newSelector) == -1) {
                         rule.selectors = rule.selectors.concat(newSelector)
+                        trackRules.push(rule)
                       }
                       break
                     }
@@ -100,6 +111,12 @@ module.exports = postcss.plugin('scopes', function (opts) {
         if (a[1]) a[0].attr('class', a[1])
       })
       $('[scoped]').removeAttr('scoped')
+
+      if (opts.optimiseCss) trackRules.forEach(rule => {
+        rule.selectors = rule.selectors.filter(selector => 
+          $(withoutPseudos(selector)).length > 0
+        )
+      })
 
       if (opts.getHTML) opts.getHTML($.html())
     }
