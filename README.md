@@ -73,14 +73,12 @@ After the transformation HTML and CSS become like this:
 
 ## Options
 
-#### globalPatterns
-Type: `Array` Array of RegExp patterns matching global classes
-
-#### html
-Type: `String` Initial html
-
-#### getHTML
-Type: `Function`, arguments `html` The function takes an argument compiled html for further processing
+| Option                                                          | Description                                                          |
+| :-------------------------------------------------------------- | :------------------------------------------------------------------- |
+| **optimiseCss** <br> Type: `Boolean`, default: `true`           | <br>Remove unused classes after processing                     |
+| **globalPatterns** <br> Type: `Array`                           | <br>Array of RegExp patterns matching global classes                     |
+| **html** <br> Type: `String`                                    | <br>Initial html                                                         |
+| **getHTML** <br> Type: `Function`, arguments `html`             | <br>The function takes an argument compiled html for further processing  |
 
 ## Example
 
