@@ -66,7 +66,7 @@ After the transformation HTML and CSS become like this:
 .title {
   background: #da9a9a;
 }
-.block .title, .block .title_scope1 {
+.block .title_scope1 {
   color: #da9a9a;
 }
 ```
