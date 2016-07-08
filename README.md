@@ -36,7 +36,7 @@ If we try to display this markup, we get a problem:
 
 ![Without scopes](https://raw.githubusercontent.com/sms-system/postcss-scopes/master/img/without_scopes.png)
 
-`.block .title` inherited styles from root .title, but we don't want this.
+`.block .title` inherited styles from root `.title`, but we don't want this.
 
 **And what to do ?**
   
